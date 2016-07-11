@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Catlab - Administracion Usuarios</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
+	<!-- bootstrap theme -->
+	<link rel="stylesheet" href="css/bootstrap-themes/darkly.min.css">
+	<!-- estilos propios -->
+	<link rel="stylesheet" href="css/estilos.css"
+
+	<!-- JQuery -->
+	<script src="js/jquery-1.10.1.min.js"></script>
+
+	<!-- bootstrap js -->
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- block-ui js -->
+	<script src="js/jqueryBlockUI-1.7.js"></script>
+
+	<!-- Validator -->
+	<link rel="stylesheet" href="css/formValidation.min.css"/>
+	<link rel="stylesheet" href="css/bootstrapValidator.css"/>
+	<script type="text/javascript" src="js/formValidation.min.js"></script>
+	<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="js/bootstrap-formValidation.js"></script>
+
+	<!-- js propios-->
+	<script src="js/utilidades.js"></script>
+	<script src="js/usuario.js"></script>
+
+	<style>
+		#form_usuario .selectContainer .form-control-feedback {
+			top: -5px;
+			right:-15px;
+		}
+	</style>
+
+	<script>
+		$(document).ready(function() {
+			// cargo navbar, footer, etc
+			initGenerico();
+			// carga combos, validaciones, eventos, etc
+			init();
+		});
+		
+	</script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div id = "header"></div>
+		<div id = "barra"> </div>
+		<div id = "ventana_modal"></div>
+
+
+		<div class="row">
+			
+			<div class="col-md-12">
+			
+				<div class="panel panel-danger">
+				<div class="panel-heading text-center"> </div>
+		  			<div class="panel-body">
+
+						<form id="form-combo-usuario" class="form form-horizontal">
+						
+							<div class="form-group">
+								<label class="col-md-3 control-label input-sm " for="textinput">Usuario</label>
+								<div class="col-md-6">
+									<select id="select_usuario" name="select_usuario" class="form-control input-sm"> </select>
+								</div>
+							</div>
+						</form>
+		  			</div>
+		  		</div>
+
+			</div>
+
+		</div>
+
+
+
+		<!-- ################################################################################################# -->
+
+
+		<div class="row">
+			
+			<div class="col-md-12">
+				
+
+				<div class="panel panel-danger">
+				<div class="panel-heading text-center"> </div>
+	  			<div class="panel-body">
+
+
+					<form id="form_usuario" class="form-horizontal" autocomplete="off">
+						<fieldset>
+					<!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-3 control-label input-sm" for="textinput">Código</label>
+					  <div class="col-md-6 ">
+					  	<input id="codigo" name="codigo" type="text" placeholder="" class="form-control input-sm" readonly>
+					  </div>
+					</div>
+
+					<div class="form-group">
+					  <label class="col-md-3 control-label input-sm" for="textinput">Nick</label>
+					  <div class="col-md-6 inputGroupContainer">
+					  	<input id="nick" name="nick" type="text" placeholder="" class="form-control input-sm">
+					  </div>
+					</div>
+
+					<div class="form-group">
+					  <label class="col-md-3 control-label input-sm" for="textinput">Password</label>
+					  <div class="col-md-6 inputGroupContainer">
+					  	<input id="password" name="password" type="text" placeholder="" class="form-control input-sm">
+					  </div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-3 control-label input-sm" for="textinput">Perfil</label>
+						<div class="col-md-6 selectContainer">
+							<select id="select_perfil" name="perfil" class="form-control input-sm"></select>
+						</div>
+					</div>
+
+					<div class="clearfix visible-xs-block"></div>
+
+					<div class="form-group">
+							<div class="btn-group col-md-6 col-sm-offset-3 col-md-offset-3" role="group">
+								
+								<input type="submit" class="btn btn-default btn-sm" id="btnRegistrar" name="btnRegistrar" value="Registrar">
+						
+								<input type="submit" class="btn btn-default btn-sm" id="btnModificar" name="btnModificar" value="Modificar">
+
+								<input type="submit" class="btn btn-default btn-sm" id="btnEliminar" name="btnEliminar" value="Eliminar">
+								
+								<input type="reset" class="btn btn-danger btn-sm" id="btnLimpiar" name="btnLimpiar" value="Limpiar" />
+							</div>
+					</div>
+					<div class="clearfix visible-xs-block"></div>
+						</fieldset>
+					</form>
+
+
+
+
+	  			</div>
+	  		</div>
+
+			</div>
+
+		</div>
+
+
+
+
+
+
+	</div>
+
+	<!-- #################################################################################################   -->
+
+	<div id="pie_pagina"> </div>
+
+    </body>
+</html>

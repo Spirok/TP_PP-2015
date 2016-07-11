@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Catlab - Administracion Rubros/Empresa</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- estilos jtable -->
+	<link rel="stylesheet" href="js/jtable/jtable.2.4.0/themes/metro/darkgray/jtable.min.css">
+	<link href="js/jtable/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
+
+	<!-- bootstrap theme -->
+	<link rel="stylesheet" href="css/bootstrap-themes/darkly.min.css">
+
+	<link rel="stylesheet" href="css/estilos.css">
+
+	<!-- JQuery -->
+	<script src="js/jquery-1.10.1.min.js"></script>
+	<!-- js jquery-ui -->
+	<script src="js/jtable/jquery-ui-1.11.4/jquery-ui.js" type="text/javascript"></script>
+	<!-- js jtable -->
+	<script src="js/jtable/jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
+	<!-- bootstrap js -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- block-ui js -->
+	<script src="js/jqueryBlockUI-1.7.js"></script>
+
+	<!-- Validator -->
+	<!--
+	<link rel="stylesheet" href="css/formValidation.min.css"/>
+	<link rel="stylesheet" href="css/bootstrapValidator.css"/>
+	<script type="text/javascript" src="js/formValidation.min.js"></script>
+	<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="js/bootstrap-formValidation.js"></script>
+	-->
+
+	<!-- js propios-->
+	<script src="js/utilidades.js"></script>
+
+
+	<script>
+
+		$(document).ready(function() {
+
+			// cargo navbar, footer, etc
+			initGenerico();
+
+			var id_perfil   = obtenerIdPerfil();
+			var accion      = "todos";
+			var idEmp       = null;
+
+			//console.log(id_perfil);
+
+			// si cambia de opcion en el combobox empresas
+			$("#select_empresa").change(function() {
+				idEmp = $("#select_empresa").val();
+				$("#mensaje_inicial").hide();
+				$("#contenedor_tabla").show();
+				$('#productos').jtable('load');
+			});
+
+			$("#todos_rubros").click(function() {
+				//if ($("#select_empresa").val() == null) return false;
+				// seteo la accion y recargo jtable
+				accion = "todos";
+				$('#productos').jtable('load');
+			});
+
+			$("#seleccionados_rubros").click(function() {
+				//if ($("#select_empresa").val() == null) return false;
+				accion = "seleccionados";
+				$('#productos').jtable('load');
+			});
+
+			$("#no_seleccionados_rubros").click(function() {
+				//if ($("#select_empresa").val() == null) return false;
+				accion = "no_seleccionados";
+				$('#productos').jtable('load');
+			});
+			
+			//$("#productos").hide();
+			//$("#area_productos").hide();
+			
+
+			// jtable productos y servicios
+			$('#productos').jtable({
+				paging: true, //Enable paging
+				pageSize: 20, //Set page size (default: 10)
+				sorting: true, //Enable sorting
+				defaultSorting: 'nombre_rubro ASC', //Set default sorting,
+				pageSizes :  [1, 2, 5, 10, 25, 50],
+				columnResizable : false,
+				actions: {
+					// al ejecutar jtable('load') se llama a listAction
+					listAction: function (postData, jtParams) {
+						return $.Deferred(function ($dfd) {
+							$.ajax({
+								url : "/rubros_de_empresa?codigo_empresa=" + idEmp + 
+								      "&desde=" + jtParams.jtStartIndex + "&hasta=" + jtParams.jtPageSize +
+								      "&accion=" + accion,
+								type: 'GET',
+								dataType: 'json',
+								data: postData,
+								success: function (data) {
+									$dfd.resolve(data);
+								},
+								error: function () {
+									$dfd.reject();
+								}
+							});
+						});
+					}
+				},
+				fields: {
+					estado: {
+						title: '',
+						list: true,
+						create: false,
+						edit: false,
+						sorting: false,
+						width: '10%',
+						display: function (data) {
+							if (data.record.estado == true) {
+								// el campo estado se mostrara como un input checkbox
+								return '<input value = ' + data.record.codigo + ' type="checkbox" checked>';
+							} else {
+								return '<input value = ' + data.record.codigo + '  type="checkbox" >';
+							}
+						}
+					},
+
+					//columna a modo de prueba
+					codigo: {
+						key: true,
+						create: false,
+						edit: false,
+						title: 'Id',
+						width: '5%',
+						sorting: false,
+						list: true,   // visible
+						display: function (data) {
+							return "<strong style=color:gray>" + data.record.codigo + "</strong>";
+						}
+					},
+					
+					nombre: {
+						title: 'Rubros',
+						edit: false,
+						width: '90%',
+						display: function (data) {
+							if (data.record.nombre == null) data.record.nombre = "";
+							return "<strong style=color:gray>" + data.record.nombre + "</strong>";
+						}
+					},
+					
+				},
+				 messages:{
+					serverCommunicationError: 'Ocurrio un error mientras se comunicaba con el servidor.',
+					loadingMessage: 'Cargando productos...',
+					noDataAvailable: 'Seleccionar Empresa de la lista',
+					//addNewRecord: 'Nuevo Registro',
+					//editRecord: 'Editar Registro',
+					//areYouSure: 'Estas seguro?',
+					//deleteConfirmation: 'Este Registro sera eliminado Estas seguro?',
+					//save: 'Guardar',
+					//saving: 'Guardando',
+					//cancel: 'Cancelar',
+					//deleteText: 'Eliminar',
+					//deleting: 'Eliminando',
+					error: 'Error',
+					close: 'Cerrar',
+					//cannotLoadOptionsFor: 'No se puede cargar opciones por campo {0}',
+					pagingInfo: '',
+					pageSizeChangeLabel: 'Cantidad de Registros',
+					gotoPageLabel: 'Ir a la pagina',
+					//canNotDeletedRecords: 'No se puede eliminar {0} de {1} registros!',
+					//deleteProggress: 'Eliminando {0} de {1} registros, procesando...'
+				}
+			});
+
+			// evento al realizar click en algun checkbox del jtable
+			$('.jtable').on('click', ':checkbox', function(e) {
+				//e.preventDefault();
+
+				var codigo = $(this).val();
+				var estado = $(this).is(':checked');
+				/*console.log("id empresa : " + idEmp + " codigo rubro :" + codigo + " estado : " + estado);*/
+				if (estado) {
+					estadoRubro("/agregar_rubro_empresa", idEmp, codigo);
+				} else {
+					estadoRubro("/quitar_rubro_empresa", idEmp, codigo);
+				}
+			});
+
+			/* funcion que setea el estado del rubro_empresa (estado true o false)*/
+			function estadoRubro(uri, empresa, codigo_r) {
+				iniciarBlockUI(" Actualizando...");
+				$.ajax({
+					url: uri,
+					type: 'get',
+					dataType: 'json',
+					data: {codigo_empresa : empresa,
+						  codigo_rubro : codigo_r},
+					success : function(resultado) {
+						console.log(resultado);
+						terminarBlockUI();
+					},
+					complete: function() {
+						terminarBlockUI();
+					},
+					error: function(xhr, status, error) {
+						terminarBlockUI();
+						console.log("Error");
+					}
+				});
+			}
+
+			// --------------------------------------------------------------------------------------------------
+			// --------------------------------------------------------------------------------------------------
+
+			// operador
+			if (id_perfil == 2) {
+				//console.log("es operador");
+				idEmp = obtenerCodEmpresaOperador();
+				if (idEmp == 0) {
+					$('#contenido-modal').text('No tiene asignado una empresa');
+					$('#myModal').modal('show');
+					return;
+				}
+				$("#contenedor_form_combo").hide();
+				$('#productos').jtable('load');
+				$("#contenedor_tabla").show();
+			}
+
+			// administrador
+			if (id_perfil == 1) {
+				//console.log("es admin");
+				// cargo el combobox cuando la pagina este lista
+				listado_empresas();
+				$("#contenedor_tabla").hide();
+				$("#ayuda_empresa").hide();
+				$("#area_productos").attr('class', 'col-md-8 col-md-offset-2');
+			}
+		});
+
+		
+
+	</script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div id = "header"></div>
+		<div id = "barra"> </div>
+		<div id = "ventana_modal"></div>
+
+		<!-- #################################################################################################   -->
+
+
+		<div class="row">
+			
+			<div class="col-md-12">
+
+				<div id="contenedor_form_combo" class="panel panel-danger">
+					<div class="panel-heading text-center"> </div>
+			  		<div class="panel-body">
+						<form id="form_empresa" class="form-horizontal" role="form">
+							
+							<div class="row">
+							  <label class="col-md-3 control-label" for="textinput">Empresa</label>  
+							  <div class="col-md-6">
+								<select id="select_empresa" name="select_empresa" class="form-control input-sm"> </select>
+							  </div>
+
+							  <div id="mensaje_inicial" class="col-md-12">
+								<div class="alert alert-danger text-center" role="alert">
+									<h1 id="mensaje_inicial_cnt" class="text-center">Elija una empresa desde la lista<br></h1>
+								</div>
+							  </div>
+							</div>
+
+						</form>
+
+			  		</div>
+			  	</div>
+			</div>
+		</div>
+			  		
+		<div class="row">
+			
+			<div class="col-md-12">
+
+				<div id="contenedor_tabla" class="panel panel-danger">
+					<div class="panel-heading text-center"> </div>
+			  		<div class="panel-body">
+
+
+						<form id="form-tabla" class="form-horizontal" role="form">
+						
+							<fieldset >
+							<div class="row">
+								<div id="area_productos" class="col-md-8 col-md-6">
+									<div id="controles">
+									<label class="control-label" for="textinput">Ver:</label>  
+									<a id = "todos_rubros" href="#" >Todos </a>
+									<a id = "seleccionados_rubros" href="#">Seleccionados</a>
+									<a id = "no_seleccionados_rubros" href="#">Sin seleccionar</a>
+
+									<div id="productos" ></div>
+									</div>
+
+								</div>
+
+								<div id="ayuda_empresa" class="col-md-4 col-md-offset-1">
+									<div id="mensaje_IE" class="alert alert-warning" role="alert">
+									<p class="text-left">
+
+
+										<h4 class="text-center">Ayuda para Productos y Servicios<br></h4>
+										<b class="">Tip de ayuda:<br></b>
+
+										Elija los productos y servicios comercializados por su empresa tildando (haciendo click)
+										el casillero junto al item correspondiente. <br> <br>
+										Para simplificar su tarea utilice los filtros “Todos” visualizando todos los ítems del listado, 
+										“Seleccionados” visualizando los ítems ya seleccionados por su empresa y “Sin seleccionar” 
+										visualizando los ítems que no han sido seleccionados por su empresa. <br> <br>
+
+										Acceder a "Solicitud" para solicitar la creación de un nuevo producto o servicio que no figure actualmente en el listado.
+									</p>
+									</div>
+								</div>
+							 </div>
+							</fieldset>
+						 </form>
+			
+			  		</div>
+			  	</div>
+			</div>
+		</div>		
+
+	</div> <!-- container  -->
+
+	<div id="pie_pagina"> </div>
+
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Catlab - Administracion Empresa</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- bootstrap theme -->
+	<link rel="stylesheet" href="css/bootstrap-themes/darkly.min.css">
+	<!-- estilos propios -->
+	<link rel="stylesheet" href="css/estilos.css">
+
+	<!-- JQuery -->
+	<script src="js/jquery-1.10.1.min.js"></script>
+
+	<!-- bootstrap js -->
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- block-ui js -->
+	<script src="js/jqueryBlockUI-1.7.js"></script>
+
+	<!-- Validator form-->
+	<link rel="stylesheet" href="css/formValidation.min.css"/>
+	<link rel="stylesheet" href="css/bootstrapValidator.css"/>
+	<script type="text/javascript" src="js/formValidation.min.js"></script>
+	<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="js/bootstrap-formValidation.js"></script>
+
+	<!-- js propios-->
+	<script src="js/utilidades.js"></script>
+	<script src="js/empresas.js"></script>
+
+	<style>
+		#form_empresa .inputGroupContainer .form-control-feedback,
+		 .selectContainer .form-control-feedback {
+			top: -5px;
+			right:-15px;
+		}
+		.buscar_usuario{
+			height: 30px;
+			padding-left: 5px;
+		}
+	</style>
+	
+	<script>
+
+
+		$(document).ready(function() {
+			// cargo navbar, footer, etc
+			initGenerico();
+
+			// carga combos con info, validaciones, eventos, etc
+			init();
+		});
+	</script>
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div id = "header"></div>
+		<div id = "barra"> </div>
+		<div id = "ventana_modal"></div>
+
+		<!-- ###################################### FORM COMBO EMPRESA #######################################   -->
+
+		<div id="contenedor_form_combo" class="panel panel-danger">
+		<div class="panel-heading text-center"></div>
+	  	<div class="panel-body">
+
+			<form id = "form-combo-empresa" class="form form-horizontal">
+				<div class="row">
+				  <label class="col-md-3 control-label" for="textinput">Empresa</label>  
+				  <div class="col-md-6">
+					<select id="select_empresa" name="select_empresa" class="form-control input-sm"> </select>
+				  </div>
+				</div>	
+			</form>
+
+		</div>
+		</div>
+		<!-- ###################################### FORM EMPRESA ############################################   -->
+
+
+
+		<div class="panel panel-danger">
+		<div class="panel-heading text-center"> </div>
+	  	<div class="panel-body">
+
+			<form id="form_empresa" class="form form-horizontal formularioApp">
+
+				<div class="row">
+					
+				
+					<div id="area_form" class="col-md-12"> 
+						<div class="row form-group">
+						  <label class="col-md-3 control-label" for="textinput">Cod. Empresa</label>  
+						  <div class="col-md-6">
+						  <input id="cod_empresa" name="cod_empresa" type="text" placeholder="" class="form-control input-sm" readonly>
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Nombre</label>  
+						  <div class="col-md-6 ">
+						  <input id="nombre" name="nombre" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						 </div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Direccion</label>  
+						  <div class="col-md-6 ">
+						  <input id="direccion" name="direccion" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Cod. Postal</label>  
+						  <div class="col-md-4 ">
+						  <input id="cod_postal" name="cod_postal" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="localidad">Localidad</label>  
+						  <div class="col-md-6 ">
+						  <input id="localidad" name="localidad" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Provincia</label>  
+						  <div class="col-md-6 ">
+						  <input id="provincia" name="provincia" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Telefono</label>  
+						  <div class="col-md-6 ">
+						  <input id="telefono" name="telefono" type="text" placeholder="" class="form-control input-sm">
+						  </div>
+						</div>
+
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Fax</label>  
+						  <div class="col-md-6 ">
+						  <input id="fax" name="fax" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Email</label>  
+						  <div class="col-md-6 ">
+						  <input id="email" name="email" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Web</label>  
+						  <div class="col-md-6 ">
+						  <input id="web" name="web" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div id="campo_responsable" class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Responsable</label>  
+						  <div class="col-md-6 ">
+						  <input id="responsable" name="responsable" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div id="campo_email_resp" class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Email Resp.</label>  
+						  <div class="col-md-6 ">
+						  <input id="email_resp" name="email_resp" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div id="campo_consultas_a" class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Consultas a</label>  
+						  <div class="col-md-6 ">
+						  <input id="consultas_a" name="consultas_a" type="text" placeholder="" class="form-control input-sm">
+							
+						  </div>
+						</div>
+
+						<div id="campo_usuario" class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Usuario</label>  
+						  <div class="col-md-5 col-xs-11 inputGroupContainer">
+							<!-- <input id="usuario" name="usuario" type="text" placeholder="" class="form-control input-sm" readonly> -->
+
+							<div class="input-group">
+							  <input type="text" id="usuario" name="usuario" class="form-control " readonly>
+							  <div class="input-group-btn">
+								<button type="button" class="btn btn-default btn-sm buscar_usuario
+								dropdown-toggle" data-toggle="dropdown"> Buscar <span class="caret"></span> </button>
+								<ul id = "listaUsuarioEmpresa" class="dropdown-menu pull-right ">
+
+								</ul>
+
+							  </div><!-- /btn-group -->
+							</div><!-- /input-group -->
+						  </div>
+
+						</div>
+
+						<div id="campo_passwd" class="form-group">
+						  <label class="col-md-3 control-label" for="textinput">Clave</label>  
+						  <div class="col-md-5 col-xs-11 inputGroupContainer">
+						  <input id="clave" name="clave" type="text" placeholder="" class="form-control input-sm" readonly>
+						  </div>
+						</div>
+
+						<div class="form-group">
+						  <label class="col-md-3 control-label" for="checkboxes"></label>
+						  <div class="col-md-4">
+							<label class="checkbox-inline text-left">
+							  <input id="estado" type="checkbox" name="estado">
+							  Habilitada
+							</label>
+						  </div>
+						</div>
+						
+						<!-- #################################################################################################   -->
+						<form class="form form-horizontal">
+
+							<div id="conjunto_botones" class="form-group">
+								<div  class="btn-group col-sm-offset-3 col-md-offset-3 col-md-6" role="group">
+										<input type="submit" class="btn btn-default btn-sm" id="btnRegistrar" name="btnRegistrar" 
+										  value="Registrar"> 
+										<input type="submit" class="btn btn-default btn-sm" id="btnEliminar" name="btnEliminar"
+										  value="Eliminar"> 
+										<input type="submit" class="btn btn-default btn-sm" id="btnModificar" name="btnModificar" 
+										  value="Modificar"> 
+										<input id="btnLimpiar" class="btn btn-danger btn-sm" type="reset" value="Limpiar" />
+
+										<button id="refrescar_empresa" type="button" class="btn btn-info btn-sm pull-right">
+											<span class="glyphicon glyphicon-refresh"></span>
+										</button>
+
+								</div>
+
+							</div>
+
+						</form>
+
+						<!-- #################################################################################################   -->
+
+					</div>
+
+					<div id="ayuda_empresa" class="col-md-4" hidden>
+						<div id="mensaje_IE" class="alert alert-warning" role="alert">
+							<p class="text-left">
+								<h4 class="text-center">Ayuda - Empresas <br> </h4>
+								<b>Tip de ayuda: <br></b>
+
+								Formato para Tel. y Fax : <br>
+								+cod pais (cod local) XXXX-XXXX <br> <br>
+								Tenga en cuenta que los datos aqui consignados apareceran tanto en el buscado de 
+								<a class="alert-link" href="http://www.catlab.com.ar">www.catlab.com.ar</a> como en el 
+								"Indice de Anunciantes" de cada edicion impresa de la revista CATLAB en la cual su empresa
+								contrate un anuncio.
+							</p>
+						</div>
+					</div>
+
+				</div>	
+			</form> <!-- form empresas -->
+
+		</div>
+		</div>
+
+	</div> <!-- container  -->
+
+	<div id="pie_pagina"> </div>
+	
+</body>
+</html>

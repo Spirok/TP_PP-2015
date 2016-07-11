@@ -1,0 +1,91 @@
+
+
+		<div class="navbar-xs">
+		<div class="navbar-primary">
+
+		<nav id="barra" class="navbar navbar-inverse" role="navigation">
+			<!-- El logotipo y el icono que despliega el menu se agrupan para mostrarlos mejor en los dispositivos moviles -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Desplegar navegación</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a id="id_index" class="navbar-brand" href="main.html"> <span class="glyphicon glyphicon-home"></span> </a>
+			</div>
+
+			<!-- Agrupar los enlaces de navegacion, los formularios y cualquier
+			otro elemento que se pueda ocultar al minimizar la barra -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+
+					<li class="dropdown">
+						<a id="navbar_admin_campos" href="" class="dropdown-toggle" data-toggle="dropdown">Admin. Campos<b class="caret"></b> </a>
+						<ul class="dropdown-menu">
+							<li><a href="rubros.html">Rubros</a></li>
+							<li><a href="marcas.html">Marcas</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Empresas<b class="caret"></b> </a>
+						<ul class="dropdown-menu">
+							<li><a href="empresas.html">Datos</a></li>
+							<li class="divider"></li>
+							<li><a href="rubro_empresa.html">Rubros/Empresa</a></li>
+							<li><a href="marca_empresa.html">Marcas/Empresa</a></li>
+						</ul>
+					</li>
+					
+					<li> <a id="navbar_usuarios" href="usuarios.html">Usuarios</a> </li>
+					<li> <a id="navbar_solicitud" href="solicitud.html">Solicitud</a> </li>
+					<li> <a id="navbar_buscador" href="buscador.html">Buscador</a> </li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user"></span>
+							<strong id = "nombre_usuario" class="text-left"> </strong>
+							<span class="glyphicon glyphicon-chevron-down"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="navbar-login">
+									<div class="row">
+										<div class="col-lg-4">
+											<p class="text-center">
+												<span class="glyphicon glyphicon-user icon-size"></span>
+											</p>
+										</div>
+										<div class="col-lg-8">
+											<strong><p id="tipo_perfil" class="text-left"></p> </strong>
+										</div>
+									</div>
+									<div class="row">
+										<strong><p id="info_empresa" class="text-left"></p> </strong>
+									</div>
+								</div>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<div class="navbar-login navbar-login-session">
+									<div class="row">
+										<div class="col-lg-12">
+											<p>
+												<a href="/Desloguear" class="btn btn-danger btn-block">Cerrar Sesion</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+
+			</div>
+		</nav>
+		</div>
+		</div>

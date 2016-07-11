@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Catlab - Administracion Marcas</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- bootstrap theme -->
+	<link rel="stylesheet" href="css/bootstrap-themes/darkly.min.css">
+	<!-- estilos propios -->
+	<link rel="stylesheet" href="css/estilos.css">
+
+	<!-- JQuery -->
+	<script src="js/jquery-1.10.1.min.js"></script>
+
+	<!-- bootstrap js -->
+	<script src="js/bootstrap.min.js"></script>
+
+	<!-- block-ui js -->
+	<script src="js/jqueryBlockUI-1.7.js"></script>
+
+	<!-- Validator -->
+	<link rel="stylesheet" href="css/formValidation.min.css"/>
+	<link rel="stylesheet" href="css/bootstrapValidator.css"/>
+	<script type="text/javascript" src="js/formValidation.min.js"></script>
+	<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="js/bootstrap-formValidation.js"></script>
+
+	<script src="js/utilidades.js"></script>
+	<script src="js/marca.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			// cargo navbar, footer, etc
+			initGenerico();			
+			init();
+		});
+
+	</script>
+
+</head>
+<body>
+	
+	<div class="container">
+		<div id = "header"></div>
+		<div id = "barra"> </div>
+		<div id = "ventana_modal"></div>
+
+
+		<div class="row">
+			
+			<div class="col-md-12">
+			
+				<div class="panel panel-danger">
+				<div class="panel-heading text-center"></div>
+		  			<div class="panel-body">
+
+						<form id = "form-combo-marca" class="form form-horizontal">
+							<fieldset>
+								<div class="form-group">
+								  <label class="col-md-3 control-label" for="textinput">Marca</label>  
+								  <div class="col-md-6">
+									<select id="select_marca" name="select_marca" class="form-control input-sm"> </select>
+								  </div>
+								</div>	
+							</fieldset>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			
+			<div class="col-md-12">
+			
+				<div class="panel panel-danger">
+				<div class="panel-heading text-center"> </div>
+		  			<div class="panel-body">
+						<form id="form_marca" class="form form-horizontal">
+							<fieldset>
+
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="textinput">Codigo</label>  
+							  <div class="col-md-6">
+							  <input id="codigo" name="codigo" type="text" placeholder="" class="form-control input-sm" readonly>
+							  </div>
+							</div>
+
+							<div class="form-group">
+							  <label class="col-md-3 control-label" for="textinput">Nombre</label>  
+							  <div class="col-md-6">
+							  	<input id="nombre" name="nombre" type="text" placeholder="" class="form-control input-sm"></input>
+							  </div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="checkboxes"></label>
+								<div class="col-md-6">
+									<label class="checkbox-inline text-left">
+									<input id="estado" type="checkbox" name="estado">
+									Habilitada
+									</label>
+								</div>
+							</div>
+
+							<form class="form form-horizontal">
+								<fieldset>
+									<div class="form-group">
+										<div  class="btn-group col-md-6 col-md-offset-3" role="group">
+												<input type="submit" class="btn btn-default btn-sm" id="btnRegistrar" name="btnRegistrar" 
+												  value="Registrar"> 
+												<input type="submit" class="btn btn-default btn-sm" id="btnEliminar" name="btnEliminar"
+												  value="Eliminar"> 
+												<input type="submit" class="btn btn-default btn-sm" id="btnModificar" name="btnModificar" 
+												  value="Modificar"> 
+												<input id="btnLimpiar" class="btn btn-danger btn-sm" type="reset" value="Limpiar" />
+										</div>
+									</div>
+								</fieldset>
+							</form> <!-- form botones -->
+
+							</fieldset>
+						</form> <!-- form marcas -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div id="pie_pagina"> </div>
+
+</body>
+</html>
